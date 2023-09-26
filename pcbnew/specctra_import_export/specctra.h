@@ -56,6 +56,13 @@ typedef DSN::T  DSN_T;
  */
 void ExportBoardToSpecctraFile( BOARD* aBoard, const wxString& aFullFilename );
 
+/**
+ * @brief Helper method to import SES file to board
+ *
+ * @param aBoard board object
+ * @param aFullFilename specctra file name
+ */
+void ImportSpecctraSessionToBoard( BOARD* aBoard, const wxString& aFullFilename );
 
 /**
  * This source file implements export and import capabilities to the

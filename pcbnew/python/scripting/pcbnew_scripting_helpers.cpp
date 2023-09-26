@@ -392,6 +392,20 @@ bool ImportSpecctraSES( wxString& aFullFilename )
     }
 }
 
+bool ImportSpecctraSES( BOARD* aBoard, wxString& aFullFilename )
+{
+    try
+    {
+        ImportSpecctraSessionToBoard( aBoard, aFullFilename );
+    }
+    catch( ... )
+    {
+        return false;
+    }
+
+    return true;
+}
+
 
 bool ExportFootprintsToLibrary( bool aStoreInNewLib, const wxString& aLibName, wxString* aLibPath )
 {

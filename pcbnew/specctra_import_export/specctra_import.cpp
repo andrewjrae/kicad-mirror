@@ -64,13 +64,9 @@ bool PCB_EDIT_FRAME::ImportSpecctraSession( const wxString& fullFileName )
             GetCanvas()->GetView()->Remove( track );
     }
 
-    SPECCTRA_DB     db;
-    LOCALE_IO       toggle;
-
     try
     {
-        db.LoadSESSION( fullFileName );
-        db.FromSESSION( GetBoard() );
+      ImportSpecctraSessionToBoard( GetBoard(), fullFileName );
     }
     catch( const IO_ERROR& ioe )
     {
@@ -81,9 +77,6 @@ bool PCB_EDIT_FRAME::ImportSpecctraSession( const wxString& fullFileName )
         DisplayErrorMessage( this, msg, extra);
         return false;
     }
-
-    GetBoard()->GetConnectivity()->ClearRatsnest();
-    GetBoard()->BuildConnectivity();
 
     OnModify();
 
@@ -102,6 +95,24 @@ bool PCB_EDIT_FRAME::ImportSpecctraSession( const wxString& fullFileName )
     Refresh();
 
     return true;
+}
+
+void ImportSpecctraSessionToBoard( BOARD* aBoard, const wxString& fullFileName ) {
+    SPECCTRA_DB     db;
+    LOCALE_IO       toggle;
+
+    try
+    {
+        db.LoadSESSION( fullFileName );
+        db.FromSESSION( aBoard );
+    }
+    catch( ... )
+    {
+        throw;
+    }
+
+    aBoard->GetConnectivity()->ClearRatsnest();
+    aBoard->BuildConnectivity();
 }
 
 
