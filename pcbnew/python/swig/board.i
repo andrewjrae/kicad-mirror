@@ -156,6 +156,9 @@ HANDLE_EXCEPTIONS(BOARD::TracksInNetBetweenPoints)
     def GetNetClasses(self):
         return self.GetDesignSettings().m_NetSettings.m_NetClasses
 
+    def GetNetClassLabelAssignments(self):
+        return self.GetDesignSettings().m_NetSettings.m_NetClassLabelAssignments
+
     def GetCurrentNetClassName(self):
         return self.GetDesignSettings().GetCurrentNetClassName()
 
